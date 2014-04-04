@@ -6,7 +6,7 @@ define(function (require, exports, module) {
     
     var FileSystem = brackets.getModule('filesystem/FileSystem'),
         FileUtils = brackets.getModule('file/FileUtils'),
-        Async = brackets.getModule('utils/Async'),
+        CCPromiseQueue = require('CCPromiseQueue'),
         Utils = require('Utils');
     
     function AsyncCombine(options) {
@@ -25,7 +25,7 @@ define(function (require, exports, module) {
         
         this.filesRead = 0;
         
-        this.promiseQueue = new Async.PromiseQueue();
+        this.promiseQueue = new CCPromiseQueue();
         
         this.bindedFileLoaded = Utils.bindFnc(this, this.fileLoaded);
         this.bindedFileError = Utils.bindFnc(this, this.fileError);

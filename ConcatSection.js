@@ -7,12 +7,14 @@ define(function (require, exports, module) {
     var FileSystem = brackets.getModule('filesystem/FileSystem'),
         FileUtils = brackets.getModule('file/FileUtils'),
         ProjectManager = brackets.getModule('project/ProjectManager'),
-        Async = brackets.getModule('utils/Async'),
+        CCPromiseQueue = require('CCPromiseQueue'),
         Utils = require('Utils'),
         AsyncCombine = require('AsyncCombine');
     
     function ConcatSection(options) {
         var opts = options || {};
+        
+        this.name = opts.name || null;
         
         this.strict = opts.strict || false;
         
@@ -25,7 +27,7 @@ define(function (require, exports, module) {
         
         this.activeAsyncCombine = null;
         
-        this.promiseQueue = new Async.PromiseQueue();
+        this.promiseQueue = new CCPromiseQueue();
         
         this.bindedPostCombine = Utils.bindFnc(this, this.postCombine);
         this.bindedAddFile = Utils.bindFnc(this, this.addFile);

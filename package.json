@@ -2,7 +2,7 @@
     "name": "jayther.conningCat",
     "title": "Conning Cat",
     "description": "Concatenates files you define into a single file.",
-    "homepage": "http://www.jayther.com/",
+    "homepage": "https://github.com/jayther/conningcat",
     "version": "1.0.0",
     "author": "J'Brian P. <jayther@rawringdesigns.net> (http://www.jayther.com)"
 }

@@ -274,7 +274,6 @@ define(function (require, exports, module) {
         fileSystemChanged: function (e, entry, added, removed) {
             if (this.enabled) {
                 var i, projectRoot = ProjectManager.getProjectRoot();
-                console.log(entry);
                 if (entry) {
                     if (projectRoot && ProjectManager.isWithinProject(entry)) {
                         if (entry.isFile) {
@@ -288,6 +287,8 @@ define(function (require, exports, module) {
                                 if (entry.fullPath === projectRoot.fullPath + filePath) {
                                     this.loadConfig(entry);
                                     this.combineAllSections();
+                                } else {
+                                    this.checkEntryWithConcatSections(entry);
                                 }
                             } else {
                                 this.checkEntryWithConcatSections(entry);

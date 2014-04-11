@@ -41,7 +41,6 @@ define(function (require, exports, module) {
         
         FileSystem.resolve(path, function (err, entry, stats) {
             if (!err) {
-                Utils.log('Utils.fileEntryFromPath: resolving ' + entry.fullPath + '.');
                 $result.resolve(entry, stats);
             } else {
                 $result.reject(err);

@@ -11,6 +11,9 @@ define(function (require, exports, module) {
      */
     function CCPromiseQueue() {
         Async.PromiseQueue.apply(this, arguments);
+        //defining in instance (some issues with proper order of execution if not defined in instance).
+        this._queue = [];
+        this._curPromise = null;
     }
     
     CCPromiseQueue.prototype = Object.create(Async.PromiseQueue.prototype);

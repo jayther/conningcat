@@ -44,7 +44,6 @@ define(function (require, exports, module) {
                 normalizedOutputFilePath = normalizedOutputFilePath.replace('./', '');
                 this.files.forEach(function (obj, i) {
                     var usePath = null, depth = 1;
-                    
                     if (typeof obj === 'string') {
                         usePath = self.basePath + obj;
                     } else if (obj && typeof obj === 'object') {
@@ -130,25 +129,12 @@ define(function (require, exports, module) {
             var usePath = this.basePath + this.outputFilePath;
             usePath = usePath.replace('./', '');
             var file = FileSystem.getFileForPath(usePath);
-            file.exists(Utils.bindFnc(this, function (err, exists) {
-                var n = null;
-                if (!err) {
-                    if (exists) {
-                        file.unlink();
-                        n = FileSystem.getFileForPath(this.basePath + this.outputFilePath);
-                    } else {
-                        n = file;
-                    }
-                    var promise = FileUtils.writeText(n, output);
-                    promise.done(function () {
-                        Utils.log('ConningCat combine successful');
-                    }).fail(function (err) {
-                        Utils.log('ConningCat combine failed: ' + err);
-                    });
-                } else {
-                    Utils.log(err);
-                }
-            }));
+            var promise = FileUtils.writeText(file, output);
+            promise.done(function () {
+                Utils.log('ConningCat combine successful');
+            }).fail(function (err) {
+                Utils.log('ConningCat combine failed: ' + err);
+            });
             this.activeAsyncCombine = null;
         },
         hasFile: function (filePath) {
